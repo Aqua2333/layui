@@ -100,7 +100,6 @@ layui.define(['element', 'common'], function(exports) {
 			}
 		}
 
-		//只展开一个二级菜单
 		if(_config.spreadOne){
 			var $ul = $container.children('ul');
 			$ul.find('li.layui-nav-item').each(function(){
@@ -110,8 +109,9 @@ layui.define(['element', 'common'], function(exports) {
 					} else {
 						$(this).children('a').children('i').html('&#xe602;');
 					}
-					$(this).siblings().removeClass('layui-nav-itemed');
-					// alert($(this).children('a').children('i').text());
+                    $(this).children('dl').slideToggle("slow");
+                    //$(this).siblings('.layui-nav-itemed').children('dl').slideUp();//如显示 则隐藏
+                    $(this).siblings().removeClass('layui-nav-itemed');
 					$(this).siblings().children('a').children('i').html('&#xe602;');
 
 				});
