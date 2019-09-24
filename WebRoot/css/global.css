@@ -45,6 +45,9 @@
 .footer{padding: 30px 0; line-height: 30px; text-align: center; background-color: #eee; color: #666; font-weight: 300;}
 body .layui-layout-admin .footer-demo{height: auto; padding: 5px 0; line-height: 26px;}
 .footer a{padding: 0 5px;}
+/* 弹出部分 */
+.layui-anim-rl{-webkit-animation-name: layui-rl; animation-name: layui-rl;}
+.layui-layer-adminRight{top: 65px !important; bottom: 0; box-shadow: 1px 1px 10px rgba(0,0,0,.1); border-radius: 0; overflow: auto;}
 
 /* 首页banner部分 */
 .site-banner{position: relative; height: 600px; text-align: center; overflow: hidden; background-color: #393D49;}
@@ -322,7 +325,7 @@ body .site-demo-nav .layui-nav-item{line-height: 40px}
 /*table*/
 .site-table tbody tr td {text-align: center;}
 .site-table tbody tr td .layui-btn+.layui-btn{margin-left: 0px;}
-.admin-table-page {position: fixed;z-index: 19980716;bottom: 0;width: 100%;background-color: #eee;border-bottom: 1px solid #ddd;left: 0px;}
+.admin-table-page {position: fixed;z-index: 19940201;bottom: 0;width: 100%;background-color: #eee;border-bottom: 1px solid #ddd;left: 0px;}
 .admin-table-page .page{padding-left:20px;}
 .admin-table-page .page .layui-laypage {margin: 6px 0 0 0;}
 
@@ -331,7 +334,7 @@ body .site-demo-nav .layui-nav-item{line-height: 40px}
 
 .admin-side-toggle,.admin-side-full{
 	position: absolute; cursor: pointer;
-    z-index: 19980716;
+    z-index: 19940201;
     left: 200px;
     color: white;
     text-align: center;
@@ -388,7 +391,7 @@ body .site-demo-nav .layui-nav-item{line-height: 40px}
 
 .admin-contextmenu{
 	position: absolute;line-height: 36px;padding: 5px 0;
-	border: 1px solid #d2d2d2;background-color: white;z-index: 19980716;border-radius: 2px;white-space: nowrap;top:30px;
+	border: 1px solid #d2d2d2;background-color: white;z-index: 19940201;border-radius: 2px;white-space: nowrap;top:30px;
 	/*width: 100px;height: 200px; */
 }
 .admin-contextmenu ul li{

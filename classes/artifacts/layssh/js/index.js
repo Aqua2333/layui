@@ -104,7 +104,8 @@ layui.config({
 		layer.msg('按Esc即可退出全屏');
 	});
 
-    var documentHeight = $(document).height() * 80%
+
+    //var documentHeight = $('#admin-body').get(0).offsetHeight;
 	$('.admin-side-helper').on('click', function () {
 		layui.use("layer", function () {
 			var layer = layui.layer;
@@ -114,24 +115,46 @@ layui.config({
             //多窗口模式，层叠置顶
             layer.open({
                 type: 2
-                ,title: '提示信息'
-                ,area: ['400px',documentHeight + 'px']
+                ,title: '提示'
+                ,area: '400px'
                 ,shade: 0
+				,shadeClose: true
                 ,id: 'LAY_help' //设定一个id，防止重复弹出
                 ,maxmin: true
                 ,offset: 'rb'
                 ,content: baseUrl + '/help.html'
+				,skin: 'layui-anim layui-anim-rl layui-layer-adminRight'//样式
                 ,btn: ['关闭']
-                ,btn2: function(){
+                ,yes: function(){
                     layer.closeAll();
                 }
                 ,zIndex: layer.zIndex
                 ,success: function(layero, index){
                     layer.setTop(layero);
-                    // layer.iframeAuto(index);
+                    //layer.iframeAuto(index); //高度自适应
                 }
             });
 		})
+	});
+
+	$('.admin-header-more').on('click', function () {
+			var layer = layui.layer;
+			layer.open({
+				type: 2,
+				id: 'LAY_more',
+				anim: 2,
+				title: false,
+				closeBtn: false,
+				offset: 'r',
+				shade: 0.1,
+				shadeClose: true,
+				skin: 'layui-anim layui-anim-rl layui-layer-adminRight',//样式
+				area: '300px',
+				content: baseUrl + '/more.html',
+				success:function (layero) {
+					layer.setTop(layero);
+				}
+			})
 	});
 
 	//锁屏

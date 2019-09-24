@@ -9,7 +9,7 @@ layui.define(['element', 'common'], function(exports) {
 
 	var Navbar = function() {
 		/**
-		 *  默认配置 
+		 *  默认配置
 		 */
 		this.config = {
 			elem: undefined, //容器
@@ -99,13 +99,21 @@ layui.define(['element', 'common'], function(exports) {
 				});
 			}
 		}
-		
+
 		//只展开一个二级菜单
 		if(_config.spreadOne){
 			var $ul = $container.children('ul');
 			$ul.find('li.layui-nav-item').each(function(){
 				$(this).on('click',function(){
+					if ($(this).hasClass('layui-nav-itemed')){
+						$(this).children('a').children('i').html('&#xe602;');
+					} else {
+						$(this).children('a').children('i').html('&#xe61a;');
+					}
 					$(this).siblings().removeClass('layui-nav-itemed');
+					// alert($(this).children('a').children('i').text());
+					$(this).siblings().children('a').children('i').html('&#xe602;');
+
 				});
 			});
 		}
@@ -144,13 +152,11 @@ layui.define(['element', 'common'], function(exports) {
 							$(this).on('click', function() {
 								var $a = $(this).children('a');
 								var href = $a.data('url');
-								var icon = $a.children('i:first').data('icon');
 								var title = $a.children('cite').text();
 								var data = {
 									elem: $a,
 									field: {
 										href: href,
-										icon: icon,
 										title: title
 									}
 								}
@@ -161,13 +167,11 @@ layui.define(['element', 'common'], function(exports) {
 						$this.on('click', function() {
 							var $a = $this.children('a');
 							var href = $a.data('url');
-							var icon = $a.children('i:first').data('icon');
 							var title = $a.children('cite').text();
 							var data = {
 								elem: $a,
 								field: {
 									href: href,
-									icon: icon,
 									title: title
 								}
 							}
@@ -191,33 +195,17 @@ layui.define(['element', 'common'], function(exports) {
 	function getHtml(data) {
 		var ulHtml = '<ul class="layui-nav layui-nav-tree beg-navbar">';
 		for(var i = 0; i < data.length; i++) {
-			if(data[i].spread) {
-				ulHtml += '<li class="layui-nav-item layui-nav-itemed">';
-			} else {
-				ulHtml += '<li class="layui-nav-item">';
-			}
+			ulHtml += '<li class="layui-nav-item">';
 			if(data[i].children !== undefined && data[i].children.length > 0) {
 				ulHtml += '<a href="javascript:;">';
-				if(data[i].icon !== undefined && data[i].icon !== '') {
-					if(data[i].icon.indexOf('fa-') !== -1) {
-						ulHtml += '<i class="fa ' + data[i].icon + '" aria-hidden="true" data-icon="' + data[i].icon + '"></i>';
-					} else {
-						ulHtml += '<i class="layui-icon" data-icon="' + data[i].icon + '">' + data[i].icon + '</i>';
-					}
-				}
+				ulHtml += '<i class="layui-icon" >&#xe602;</i>';
 				ulHtml += '<cite>' + data[i].title + '</cite>'
 				ulHtml += '</a>';
 				ulHtml += '<dl class="layui-nav-child">'
 				for(var j = 0; j < data[i].children.length; j++) {
 					ulHtml += '<dd title="'+data[i].children[j].title+'">';
 					ulHtml += '<a href="javascript:;" data-url="' + data[i].children[j].href + '">';
-					if(data[i].children[j].icon !== undefined && data[i].children[j].icon !== '') {
-						if(data[i].children[j].icon.indexOf('fa-') !== -1) {
-							ulHtml += '<i class="fa ' + data[i].children[j].icon + '" data-icon="' + data[i].children[j].icon + '" aria-hidden="true"></i>';
-						} else {
-							ulHtml += '<i class="layui-icon" data-icon="' + data[i].children[j].icon + '">' + data[i].children[j].icon + '</i>';
-						}
-					}
+					ulHtml += '<i class="layui-icon" >&#xe602;</i>';
 					ulHtml += '<cite>' + data[i].children[j].title + '</cite>';
 					ulHtml += '</a>';
 					ulHtml += '</dd>';
@@ -226,13 +214,8 @@ layui.define(['element', 'common'], function(exports) {
 			} else {
 				var dataUrl = (data[i].href !== undefined && data[i].href !== '') ? 'data-url="' + data[i].href + '"' : '';
 				ulHtml += '<a href="javascript:;" ' + dataUrl + '>';
-				if(data[i].icon !== undefined && data[i].icon !== '') {
-					if(data[i].icon.indexOf('fa-') !== -1) {
-						ulHtml += '<i class="fa ' + data[i].icon + '" aria-hidden="true" data-icon="' + data[i].icon + '"></i>';
-					} else {
-						ulHtml += '<i class="layui-icon" data-icon="' + data[i].icon + '">' + data[i].icon + '</i>';
-					}
-				}
+				ulHtml += '<i class="layui-icon">&#xe602;</i>';
+
 				ulHtml += '<cite>' + data[i].title + '</cite>'
 				ulHtml += '</a>';
 			}
