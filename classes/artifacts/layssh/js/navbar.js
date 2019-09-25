@@ -100,18 +100,17 @@ layui.define(['element', 'common'], function(exports) {
 			}
 		}
 
-		//只展开一个二级菜单
 		if(_config.spreadOne){
 			var $ul = $container.children('ul');
 			$ul.find('li.layui-nav-item').each(function(){
 				$(this).on('click',function(){
 					if ($(this).hasClass('layui-nav-itemed')){
-						$(this).children('a').children('i').html('&#xe602;');
-					} else {
 						$(this).children('a').children('i').html('&#xe61a;');
+					} else {
+						$(this).children('a').children('i').html('&#xe602;');
 					}
-					$(this).siblings().removeClass('layui-nav-itemed');
-					// alert($(this).children('a').children('i').text());
+                    $(this).siblings('.layui-nav-itemed').children('dl').slideUp();//如显示 则隐藏
+                    $(this).siblings().removeClass('layui-nav-itemed');
 					$(this).siblings().children('a').children('i').html('&#xe602;');
 
 				});
@@ -202,12 +201,29 @@ layui.define(['element', 'common'], function(exports) {
 				ulHtml += '<cite>' + data[i].title + '</cite>'
 				ulHtml += '</a>';
 				ulHtml += '<dl class="layui-nav-child">'
-				for(var j = 0; j < data[i].children.length; j++) {
+				for(let j = 0; j < data[i].children.length; j++) {
+					let child = data[i].children[j];
 					ulHtml += '<dd title="'+data[i].children[j].title+'">';
-					ulHtml += '<a href="javascript:;" data-url="' + data[i].children[j].href + '">';
-					ulHtml += '<i class="layui-icon" >&#xe602;</i>';
-					ulHtml += '<cite>' + data[i].children[j].title + '</cite>';
-					ulHtml += '</a>';
+					if (child !== undefined && child.children.length > 0){
+						ulHtml += '<a href="javascript:;">';
+						ulHtml += '<i class="layui-icon" >&#xe602;</i>';
+						ulHtml += '<cite>' + data[i].children[j].title + '</cite>'
+						ulHtml += '</a>';
+						ulHtml += '<dl class="layui-nav-child">'
+						for (let x = 0; x < child.children.length; x++) {
+							ulHtml += '<dd title="'+child.children[x].title+'">';
+							ulHtml += '<a href="javascript:;" data-url="' + child.children[x].href + '">';
+							ulHtml += '<i class="layui-icon" >&#xe602;</i>';
+							ulHtml += '<cite>' + child.children[x].title + '</cite>';
+							ulHtml += '</a>';
+							ulHtml += '</dd>';
+						}
+					} else {
+						ulHtml += '<a href="javascript:;" data-url="' + data[i].children[j].href + '">';
+						ulHtml += '<i class="layui-icon" >&#xe602;</i>';
+						ulHtml += '<cite>' + data[i].children[j].title + '</cite>';
+						ulHtml += '</a>';
+					}
 					ulHtml += '</dd>';
 				}
 				ulHtml += '</dl>';

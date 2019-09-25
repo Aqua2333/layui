@@ -105,7 +105,7 @@ layui.config({
 	});
 
 
-    //var documentHeight = $('#admin-body').get(0).offsetHeight;
+    var documentWidth = $('#admin-body').get(0).offsetWidth;
 	$('.admin-side-helper').on('click', function () {
 		layui.use("layer", function () {
 			var layer = layui.layer;
@@ -116,7 +116,7 @@ layui.config({
             layer.open({
                 type: 2
                 ,title: '提示'
-                ,area: '400px'
+                ,area: documentWidth * 0.3 + 'px'
                 ,shade: 0
 				,shadeClose: true
                 ,id: 'LAY_help' //设定一个id，防止重复弹出
@@ -137,7 +137,7 @@ layui.config({
 		})
 	});
 
-	$('.admin-header-more').on('click', function () {
+	$('#admin-header-more').on('click', function () {
 			var layer = layui.layer;
 			layer.open({
 				type: 2,
@@ -156,7 +156,6 @@ layui.config({
 				}
 			})
 	});
-
 	//锁屏
 	$(document).on('keydown', function() {
 		var e = window.event;

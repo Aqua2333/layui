@@ -517,6 +517,7 @@ public class MenuInfServiceImpl extends BaseServiceImpl<TSysMenuInf> implements 
 					object.setTitle(menuInf.getText());
 					object.setHref(menuInf.getMenuUrl());
 					object.setIcon(menuInf.getIconCls());
+					twoMenuForLayUI.add(object);
 					children.add(object);
 				}
 			}
@@ -524,6 +525,23 @@ public class MenuInfServiceImpl extends BaseServiceImpl<TSysMenuInf> implements 
 			if (menuForLayUI.getChildren() != null && menuForLayUI.getChildren().size() > 0) {
 				menuInfs.add(menuForLayUI);
 			}
+		}
+
+		// 寻找三级节点
+		for (MenuForLayUI menuForLayUI : twoMenuForLayUI) {
+			List<MenuForLayUI> child = new ArrayList<>();
+			for (MenuInf menuInf : tl) {
+				if (menuInf.getId() != null && menuInf.getPid() != null &&menuInf.getPid().length() > 0 && menuForLayUI.getId().equals(menuInf.getPid())){
+					MenuForLayUI object = new MenuForLayUI();
+					object.setId(menuInf.getId());
+					object.setPid(menuInf.getPid());
+					object.setTitle(menuInf.getText());
+					object.setHref(menuInf.getMenuUrl());
+					object.setIcon(menuInf.getIconCls());
+					child.add(object);
+				}
+			}
+			menuForLayUI.setChildren(child);
 		}
 
 		return menuInfs;
@@ -678,6 +696,22 @@ public class MenuInfServiceImpl extends BaseServiceImpl<TSysMenuInf> implements 
 				object.setIcon(menuInf.getIconCls());
 				object.setSpread(true);
 				oneTreeForLayUI.add(object);
+			}
+		}
+		// 寻找二级节点
+		List<TreeForLayUI> twoTreeForLayUI = new ArrayList<TreeForLayUI>();
+		for (MenuInf menuInf : tl) {
+			for (TreeForLayUI treeForLayUI : oneTreeForLayUI) {
+				if (menuInf.getMenuUrl().length() == 0 && treeForLayUI.getId().equals(menuInf.getPid())){
+					TreeForLayUI object = new TreeForLayUI();
+					object.setId(menuInf.getId());
+					object.setPid(menuInf.getPid());
+					object.setName(menuInf.getText());
+					object.setIcon(menuInf.getIconCls());
+					object.setSpread(true);
+					twoTreeForLayUI.add(object);
+				}
+				treeForLayUI.setChildren(twoTreeForLayUI);
 			}
 		}
 

@@ -1083,7 +1083,7 @@ a cite {
 }
 
 .layui-bg-blue {
-    background-color: #1E9FFF !important
+    background-color: #1fbddf !important
 }
 
 .layui-bg-black {
@@ -1091,8 +1091,8 @@ a cite {
 }
 
 .layui-bg-gray {
-    background-color: #eee !important;
-    color: #666 !important
+    background-color:  #f0f0f0; !important;
+    color: #000000 !important
 }
 
 .layui-badge-rim, .layui-colla-content, .layui-colla-item, .layui-collapse, .layui-elem-field, .layui-form-pane .layui-form-item[pane], .layui-form-pane .layui-form-label, .layui-input, .layui-layedit, .layui-layedit-tool, .layui-quote-nm, .layui-select, .layui-tab-bar, .layui-tab-card, .layui-tab-title, .layui-tab-title .layui-this:after, .layui-textarea {
@@ -2666,7 +2666,7 @@ body .layui-table-tips .layui-layer-content {
 .layui-nav {
     position: relative;
     padding: 0 20px;
-    background-color: #393D49;
+   /* background-color: #393D49;*/
     color: #fff;
     border-radius: 2px;
     font-size: 0;
@@ -2674,7 +2674,7 @@ body .layui-table-tips .layui-layer-content {
 }
 
 .layui-nav * {
-    font-size: 14px
+    font-size: 14px;
 }
 
 .layui-nav .layui-nav-item {
@@ -2683,14 +2683,19 @@ body .layui-table-tips .layui-layer-content {
     *display: inline;
     *zoom: 1;
     vertical-align: middle;
-    line-height: 60px
+    line-height: 60px;
+    border-bottom: #ccc 1px dotted;
+}
+
+.layui-nav-child dd{
+    border-bottom: #ccc 1px dotted;
 }
 
 .layui-nav .layui-nav-item a {
     display: block;
     padding: 0 20px;
-    color: #fff;
-    color: rgba(255, 255, 255, .7);
+    color: #000000;
+    color: rgba(0, 0, 0, .7);
     transition: all .3s;
     -webkit-transition: all .3s
 }
@@ -2711,7 +2716,7 @@ body .layui-table-tips .layui-layer-content {
 }
 
 .layui-nav .layui-nav-item a:hover, .layui-nav .layui-this a {
-    color: #fff
+    color: #00CFC6;
 }
 
 .layui-nav .layui-this:after {
@@ -2765,7 +2770,7 @@ body .layui-table-tips .layui-layer-content {
     background-color: #fff;
     z-index: 100;
     border-radius: 2px;
-    white-space: nowrap
+    white-space: nowrap;
 }
 
 .layui-nav .layui-nav-child a {
@@ -2782,8 +2787,8 @@ body .layui-table-tips .layui-layer-content {
 }
 
 .layui-nav .layui-nav-child dd.layui-this a, .layui-nav-child dd.layui-this {
-    background-color: #5FB878;
-    color: #fff
+    /*background-color: #5FB878;
+    color: #fff*/
 }
 
 .layui-nav-child dd.layui-this:after {
@@ -2810,7 +2815,7 @@ body .layui-table-tips .layui-layer-content {
 }
 
 .layui-nav-tree .layui-nav-item a:hover {
-    background-color: #4E5465
+    /*background-color: #4E5465*/
 }
 
 .layui-nav-tree .layui-nav-bar {
@@ -2820,8 +2825,7 @@ body .layui-table-tips .layui-layer-content {
 }
 
 .layui-nav-tree .layui-nav-child dd.layui-this, .layui-nav-tree .layui-nav-child dd.layui-this a, .layui-nav-tree .layui-this, .layui-nav-tree .layui-this > a, .layui-nav-tree .layui-this > a:hover {
-    background-color: #009688;
-    color: #fff
+    color: #009688;
 }
 
 .layui-nav-tree .layui-this:after {
@@ -2829,7 +2833,7 @@ body .layui-table-tips .layui-layer-content {
 }
 
 .layui-nav-itemed > a, .layui-nav-tree .layui-nav-title a, .layui-nav-tree .layui-nav-title a:hover {
-    color: #fff !important
+    color: rgba(0,3,0,0.7) !important
 }
 
 .layui-nav-tree .layui-nav-child {
@@ -2843,13 +2847,13 @@ body .layui-table-tips .layui-layer-content {
 .layui-nav-tree .layui-nav-child a {
     height: 40px;
     line-height: 40px;
-    color: #fff;
-    color: rgba(255, 255, 255, .7)
+    color: #000000;
+    color: rgba(0, 0, 0, .7)
 }
 
 .layui-nav-tree .layui-nav-child, .layui-nav-tree .layui-nav-child a:hover {
     background: 0 0;
-    color: #fff
+    color: #00CFC6;
 }
 
 .layui-nav-tree .layui-nav-more {
@@ -2863,9 +2867,9 @@ body .layui-table-tips .layui-layer-content {
 }
 
 .layui-nav-itemed .layui-nav-child {
-    display: block;
+    /*display: block;*/
     padding: 0;
-    background-color: rgba(0, 0, 0, .3) !important
+    /*background-color: rgba(0, 0, 0, .3) !important*/
 }
 
 .layui-nav-side {

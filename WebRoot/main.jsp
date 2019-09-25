@@ -52,7 +52,12 @@
             </div>
             <ul class="layui-nav admin-header-item">
 
-                <li class="layui-nav-item"><a href="javascript:;"
+                <li class="layui-nav-item layui-hide-xs" id="admin-header-theme" lay-unselect>
+                    <a href="javascript:;">
+                    <i class="layui-icon" style="font-size: 16px" aria-hidden="true">&#xe66a;</i>
+                    </a>
+                </li>
+                <li class="layui-nav-item layui-hide-xs" lay-unselect><a href="javascript:;"
                                               class="admin-header-user"> <img src="images/0.jpg"/> <span
                         id="main_user"><%=userNm%></span>
                 </a>
@@ -67,13 +72,13 @@
                         </dd>
                     </dl>
                 </li>
-                <li class="admin-header-more">
+                <li class="layui-nav-item layui-hide-xs" id="admin-header-more" lay-unselect>
                     <i class="layui-icon" style="font-size: 16px; color: #999999" aria-hidden="true">&#xe671;</i>
                 </li>
             </ul>
         </div>
     </div>
-    <div class="layui-side layui-bg-black" id="admin-side">
+    <div class="layui-side layui-bg-gray" id="admin-side">
         <div class="layui-side-scroll" id="admin-navbar-side"
              lay-filter="side"></div>
     </div>

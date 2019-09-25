@@ -79,10 +79,16 @@
                 i.find("." + d)[0] || ("javascript:;" !== s.attr("href") && "_blank" === s.attr("target") || c || (a.find("." + l).removeClass(l), i.addClass(l)), layui.event.call(this, e, "nav(" + n + ")", i))
             }, clickChild: function () {
                 var i = t(this), a = i.parents(o), n = a.attr("lay-filter");
-                a.find("." + l).removeClass(l), i.addClass(l), layui.event.call(this, e, "nav(" + n + ")", i)
+                a.find("." + l).removeClass(l), i.addClass(l);
+                if (typeof (i.children('a').attr('data-url')) === 'undefined'){
+                    i.children('dl').slideToggle();
+                } else {
+                    layui.event.call(this, e, "nav(" + n + ")", i)
+                }
             }, showChild: function () {
-                var i = t(this), a = i.parents(o), e = i.parent(), l = i.siblings("." + d);
-                a.hasClass(u) && (l.removeClass(f), e["none" === l.css("display") ? "addClass" : "removeClass"](c + "ed"))
+                var i = t(this), a = i.parents(o), e = i.parent(), l = i.siblings("." + d), child = e.children('dl');
+                a.hasClass(u) && (l.removeClass(f), e["none" === l.css("display") ? "addClass" : "removeClass"](c + "ed"));
+                child.slideToggle()
             }, collapse: function () {
                 var i = t(this), a = i.find(".layui-colla-icon"), l = i.siblings(".layui-colla-content"),
                     s = i.parents(".layui-collapse").eq(0), o = s.attr("lay-filter"), c = "none" === l.css("display");
