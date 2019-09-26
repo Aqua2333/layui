@@ -73,7 +73,7 @@
                     </dl>
                 </li>
                 <li class="layui-nav-item layui-hide-xs" id="admin-header-more" lay-unselect>
-                    <i class="layui-icon" style="font-size: 16px; color: #333333" aria-hidden="true">&#xe671;</i>
+                    <i class="layui-icon" style="font-size: 16px;" aria-hidden="true">&#xe671;</i>
                 </li>
             </ul>
         </div>
@@ -165,6 +165,11 @@
     });
     layui.use('colorpicker',function () {
        var colorpicker = layui.colorpicker;
+        var theme = layui.data('lay_theme').color;
+        if(theme){
+            $('.layui-nav-item>a,div.admin-login-box>a,#admin-header-more,#main_user').css('color', theme[1]);
+            $('.layui-bg-black,.layui-side-scroll,.layui-side-scroll .layui-nav-child,div.header').css('background-color', theme[0]);
+        }
         colorpicker.render({
             elem: '#admin-header-theme'
             ,color: ''
@@ -185,9 +190,9 @@
                 } else {
                     thatColor = "#fff";
                 }
-                $('').css('color', thatColor);
-                $('.layui-bg-gray,.layui-side-scroll,.layui-nav-item,.layui-nav-child,div.header').css('background-color', color);
-                layui.data('vaeyoAdmin_theme', {
+                $('.layui-nav-item>a,div.admin-login-box>a,#admin-header-more,#main_user').css('color', thatColor);
+                $('.layui-bg-black,.layui-side-scroll,.layui-side-scroll .layui-nav-child,div.header').css('background-color', color);
+                layui.data('lay_theme', {
                     key: 'color'
                     ,value: [color,thatColor]
                 });
@@ -195,14 +200,16 @@
             }
         });
 
-        $('#vaeyo-color').on('dblclick', function(e){
-            layui.data('vaeyoAdmin_theme', {
+        $('#admin-header-theme').on('dblclick', function(e){
+            layui.data('lay_theme', {
                 key: 'color'
                 ,remove: true
             });
-            $('.vaeyo-menulist,.vaeyo-menulist .vaeyo-menulist-2 .layui-icon,.vaeyo-menulist .vaeyo-menulist-3 .layui-icon').css('color', "#000");
-            $('.layui-layout-admin .layui-header,.vaeyo-tab .layui-tab-title').css('background-color', "#000");
-            $('.layui-layout-admin .layui-side').css('background-color', "#f0f0f0");
+            $('div.admin-login-box>a,#admin-header-more,#main_user').css('color', "#333333");
+            $('.layui-nav-item>a').css('color', "rgba(255,253,255,0.7)");
+            $('.layui-bg-black,.layui-side-scroll').css('background-color', "#393D49");
+            $('.layui-side-scroll .layui-nav-child').css('background-color', "rgba(0,0,0,0.3)");
+            $('div.header').css('background-color', "#fff");
             layer.msg("主题已成功恢复默认");
         })
     });

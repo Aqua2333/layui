@@ -171,7 +171,8 @@ a cite {
 }
 
 .layui-show {
-    display: block !important
+    display: block !important;
+    background-color: white;
 }
 
 .layui-hide {
@@ -3567,9 +3568,6 @@ body .layui-table-tips .layui-layer-content {
     line-height: 60px;
 }
 
-.layui-nav-child dd a{
-    background-color: rgba(0,0,0,0.3);
-}
 
 .layui-nav-child .layui-nav-child dd a{
 
