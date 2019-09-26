@@ -472,7 +472,7 @@ public class InsInfServiceImpl extends BaseServiceImpl<TSysInsInf> implements II
 			if (zTree.getpId() == null || zTree.getpId().length() == 0) {
 				rootPid = zTree.getId();
 				rootTreeForLayUI.setId(zTree.getId());
-				rootTreeForLayUI.setName(zTree.getName());
+				rootTreeForLayUI.setTitle(zTree.getName());
 				rootTreeForLayUI.setSpread(true);
 				rootPid = zTree.getId();
 			}
@@ -485,7 +485,7 @@ public class InsInfServiceImpl extends BaseServiceImpl<TSysInsInf> implements II
 				TreeForLayUI object = new TreeForLayUI();
 				object.setId(zTree.getId());
 				object.setPid(zTree.getpId());
-				object.setName(zTree.getName());
+				object.setTitle(zTree.getName());
 				object.setIcon("");
 				object.setSpread(true);
 				oneTreeForLayUI.add(object);
@@ -503,7 +503,7 @@ public class InsInfServiceImpl extends BaseServiceImpl<TSysInsInf> implements II
 					TreeForLayUI object = new TreeForLayUI();
 					object.setId(zTree.getId());
 					object.setPid(zTree.getpId());
-					object.setName(zTree.getName());
+					object.setTitle(zTree.getName());
 					object.setIcon("");
 					object.setSpread(false);
 					childList.add(object);
@@ -522,7 +522,7 @@ public class InsInfServiceImpl extends BaseServiceImpl<TSysInsInf> implements II
 					TreeForLayUI object = new TreeForLayUI();
 					object.setId(zTree.getId());
 					object.setPid(zTree.getpId());
-					object.setName(zTree.getName());
+					object.setTitle(zTree.getName());
 					object.setIcon("");
 					object.setSpread(false);
 					childList.add(object);
@@ -543,7 +543,7 @@ public class InsInfServiceImpl extends BaseServiceImpl<TSysInsInf> implements II
 					TreeForLayUI object = new TreeForLayUI();
 					object.setId(zTree.getId());
 					object.setPid(zTree.getpId());
-					object.setName(zTree.getName());
+					object.setTitle(zTree.getName());
 					object.setIcon("");
 					object.setSpread(false);
 					childList.add(object);

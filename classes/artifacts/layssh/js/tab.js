@@ -12,7 +12,8 @@ layui.define(['element', 'common'], function(exports) {
 				elem: undefined,
 				closed: true, //是否包含删除按钮
 				autoRefresh: false,
-				contextMenu:false
+				contextMenu:false,
+				//maxSetting: 5 //最多只能打开的选项卡
 			};
 		};
 	var ELEM = {};
@@ -91,6 +92,9 @@ layui.define(['element', 'common'], function(exports) {
 	 * @param {Object} data
 	 */
 	Tab.prototype.tabAdd = function(data) {
+		if (typeof (data.href) === 'undefined' || data.href.length <= 0){
+			return;
+		}
 		var that = this;
 		var _config = that.config;
 		var tabIndex = that.exists(data.title);

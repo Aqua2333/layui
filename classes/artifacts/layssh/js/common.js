@@ -1,4 +1,19 @@
 /** common.js By Beginner Emain:zheng_jinfan@126.com HomePage:http://www.zhengjinfan.cn */
+
+/**
+ * 获取项目根路径
+ * @returns {string}
+ */
+var baseUrl = getPath();
+
+
+function getPath() {
+	var pathName = document.location.pathname;
+	var index = pathName.substr(1).indexOf("/");
+	var result = pathName.substr(0, index + 1);
+	return result;
+}
+
 layui.define(['layer'], function(exports) {
 	"use strict";
 

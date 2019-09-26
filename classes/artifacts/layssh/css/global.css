@@ -26,10 +26,9 @@
 .menu a:hover{color: #fff; transition: all .5s; -webkit-transition: all .5s}
 .menu a.this{color: #fff}
 .menu a.this::after{content: ''; position: absolute; left: 0; bottom: -1px; width: 100%; height: 5px; background-color: #5FB878;}
-
 .header-index{background-color: #080018; border: none;}
 
-.layui-layout-admin .header-demo{border-bottom-color: #1AA094; background-color: #fff;}
+.layui-layout-admin .header-demo{border-bottom-color: #01AAED; background-color: #fff;}
 .header-demo .logo{left: 40px;}
 .header-demo .layui-nav{top: 0;}
 .header-demo .layui-nav .layui-nav-item{margin: 0 10px; line-height: 65px;}
@@ -281,7 +280,7 @@ body .site-demo-nav .layui-nav-item{line-height: 40px}
 	height: 100%;
 }
 .admin-nav-card>.layui-tab-title{
-	border-bottom: 1px solid #1AA094;
+    border-bottom: 1px solid #01AAED;
 }
 .admin-nav-card .layui-tab-title cite{
 	font-style: normal;
@@ -289,7 +288,7 @@ body .site-demo-nav .layui-nav-item{line-height: 40px}
 }
 .admin-nav-card>.layui-tab-title .layui-this{
 	color: white;
-    background-color: #1AA094;
+    background-color: #01AAED;
 }
 .admin-nav-card>.layui-tab-title .layui-this:after{
 	border-bottom: 0;
@@ -305,7 +304,10 @@ body .site-demo-nav .layui-nav-item{line-height: 40px}
 .admin-header-user .layui-nav-mored{
 	top: 26px;
 }
-
+/* 第三节点 */
+.layui-nav .layui-nav-item .layui-nav-child .layui-nav-child dd a{
+    padding-left: 60px;
+}
 /*lock*/
 .admin-header-lock{
 	width: 320px; height: 150px; padding: 20px; position: relative; text-align: center;
@@ -317,10 +319,10 @@ body .site-demo-nav .layui-nav-item{line-height: 40px}
 	width: 60px; height: 60px; border-radius: 100%;
 }
 .admin-header-lock-name{
-	color: #009688;margin: 8px 0 15px 0;
+    color: #01AAEB;margin: 8px 0 15px 0;
 }
 .admin-header-lock-input{
-	width: 150px; color: #FFFFFF; height: 30px; border: 0;background-color: #009688; padding: 0 7px; border-radius: 2px;
+    width: 150px; color: #FFFFFF; height: 30px; border: 0;background-color: #01AAEB; padding: 0 7px; border-radius: 2px;
 }
 /*table*/
 .site-table tbody tr td {text-align: center;}
@@ -340,7 +342,7 @@ body .site-demo-nav .layui-nav-item{line-height: 40px}
     text-align: center;
     width: 30px;
     height: 30px;
-    background-color: #1AA094;
+    background-color: #01AAED;
     line-height: 30px;
     top: 25%;
 }
@@ -364,7 +366,7 @@ body .site-demo-nav .layui-nav-item{line-height: 40px}
     text-align: center;
     width: 30px;
     height: 30px;
-    background-color: #1AA094;
+    background-color: #01AAED;
     line-height: 30px;
     top: 25%;
 }
