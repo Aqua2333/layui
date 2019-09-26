@@ -149,7 +149,7 @@ layui.config({
 				shade: 0.1,
 				shadeClose: true,
 				skin: 'layui-anim layui-anim-rl layui-layer-adminRight',//样式
-				area: '300px',
+				area: '400px',
 				content: baseUrl + '/more.html',
 				success:function (layero) {
 					layer.setTop(layero);

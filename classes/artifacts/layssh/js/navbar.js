@@ -109,7 +109,8 @@ layui.define(['element', 'common'], function(exports) {
 					} else {
 						$(this).children('a').children('i').html('&#xe602;');
 					}
-                    $(this).siblings('.layui-nav-itemed').children('dl').slideUp();//如显示 则隐藏
+                    $(this).children('dl').slideToggle("slow");
+                    //$(this).siblings('.layui-nav-itemed').children('dl').slideUp();//如显示 则隐藏
                     $(this).siblings().removeClass('layui-nav-itemed');
 					$(this).siblings().children('a').children('i').html('&#xe602;');
 
@@ -201,29 +202,12 @@ layui.define(['element', 'common'], function(exports) {
 				ulHtml += '<cite>' + data[i].title + '</cite>'
 				ulHtml += '</a>';
 				ulHtml += '<dl class="layui-nav-child">'
-				for(let j = 0; j < data[i].children.length; j++) {
-					let child = data[i].children[j];
+				for(var j = 0; j < data[i].children.length; j++) {
 					ulHtml += '<dd title="'+data[i].children[j].title+'">';
-					if (child !== undefined && child.children.length > 0){
-						ulHtml += '<a href="javascript:;">';
-						ulHtml += '<i class="layui-icon" >&#xe602;</i>';
-						ulHtml += '<cite>' + data[i].children[j].title + '</cite>'
-						ulHtml += '</a>';
-						ulHtml += '<dl class="layui-nav-child">'
-						for (let x = 0; x < child.children.length; x++) {
-							ulHtml += '<dd title="'+child.children[x].title+'">';
-							ulHtml += '<a href="javascript:;" data-url="' + child.children[x].href + '">';
-							ulHtml += '<i class="layui-icon" >&#xe602;</i>';
-							ulHtml += '<cite>' + child.children[x].title + '</cite>';
-							ulHtml += '</a>';
-							ulHtml += '</dd>';
-						}
-					} else {
-						ulHtml += '<a href="javascript:;" data-url="' + data[i].children[j].href + '">';
-						ulHtml += '<i class="layui-icon" >&#xe602;</i>';
-						ulHtml += '<cite>' + data[i].children[j].title + '</cite>';
-						ulHtml += '</a>';
-					}
+					ulHtml += '<a href="javascript:;" data-url="' + data[i].children[j].href + '">';
+					ulHtml += '<i class="layui-icon" >&#xe602;</i>';
+					ulHtml += '<cite>' + data[i].children[j].title + '</cite>';
+					ulHtml += '</a>';
 					ulHtml += '</dd>';
 				}
 				ulHtml += '</dl>';
