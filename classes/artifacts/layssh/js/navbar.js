@@ -99,24 +99,25 @@ layui.define(['element', 'common'], function(exports) {
 				});
 			}
 		}
-
+		// 只开启一个二级菜单
 		if(_config.spreadOne){
 			var $ul = $container.children('ul');
 			$ul.find('li.layui-nav-item').each(function(){
 				$(this).on('click',function(){
-					if ($(this).hasClass('layui-nav-itemed')){
-						$(this).children('a').children('i').html('&#xe61a;');
-					} else {
-						$(this).children('a').children('i').html('&#xe602;');
-					}
-                    $(this).children('dl').slideToggle("slow");
-                    //$(this).siblings('.layui-nav-itemed').children('dl').slideUp();//如显示 则隐藏
-                    $(this).siblings().removeClass('layui-nav-itemed');
+					$(this).children('a').children('i').html(($(this).hasClass('layui-nav-itemed') ? '&#xe61a;' : '&#xe602;'));
+					$(this).siblings().removeClass('layui-nav-itemed');
 					$(this).siblings().children('a').children('i').html('&#xe602;');
-
 				});
 			});
 		}
+		// 三级菜单图标变换
+		$container.find('dd.two').each(function () {
+			$(this).on('click', function () {
+				if ($(this).children('dl').length > 0){
+					$(this).children('a').children('i').html(($(this).hasClass('layui-nav-itemed') ? '&#xe61a;' : '&#xe602;'));
+				}
+			})
+		})
 		return _that;
 	};
 	/**
@@ -202,12 +203,30 @@ layui.define(['element', 'common'], function(exports) {
 				ulHtml += '<cite>' + data[i].title + '</cite>'
 				ulHtml += '</a>';
 				ulHtml += '<dl class="layui-nav-child">'
-				for(var j = 0; j < data[i].children.length; j++) {
-					ulHtml += '<dd title="'+data[i].children[j].title+'">';
-					ulHtml += '<a href="javascript:;" data-url="' + data[i].children[j].href + '">';
-					ulHtml += '<i class="layui-icon" >&#xe602;</i>';
-					ulHtml += '<cite>' + data[i].children[j].title + '</cite>';
-					ulHtml += '</a>';
+				for(let j = 0; j < data[i].children.length; j++) {
+					let child = data[i].children[j];
+					if (child !== undefined && child.children.length > 0){
+						ulHtml += '<dd title="'+data[i].children[j].title+'" class="two" style="display: contents">';
+						ulHtml += '<a href="javascript:;">';
+						ulHtml += '<i class="layui-icon" >&#xe602;</i>';
+						ulHtml += '<cite>' + data[i].children[j].title + '</cite>'
+						ulHtml += '</a>';
+						ulHtml += '<dl class="layui-nav-child">'
+						for (let x = 0; x < child.children.length; x++) {
+							ulHtml += '<dd title="'+child.children[x].title+'">';
+							ulHtml += '<a href="javascript:;" data-url="' + child.children[x].href + '">';
+							ulHtml += '<i class="layui-icon" >&#xe602;</i>';
+							ulHtml += '<cite>' + child.children[x].title + '</cite>';
+							ulHtml += '</a>';
+							ulHtml += '</dd>';
+						}
+					} else {
+						ulHtml += '<dd title="'+data[i].children[j].title+'" class="two">';
+						ulHtml += '<a href="javascript:;" data-url="' + data[i].children[j].href + '">';
+						ulHtml += '<i class="layui-icon" >&#xe602;</i>';
+						ulHtml += '<cite>' + data[i].children[j].title + '</cite>';
+						ulHtml += '</a>';
+					}
 					ulHtml += '</dd>';
 				}
 				ulHtml += '</dl>';

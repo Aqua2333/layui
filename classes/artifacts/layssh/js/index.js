@@ -2,21 +2,6 @@
 
 var tab;
 
-
-/**
- * 获取项目根路径
- * @returns {string}
- */
-var baseUrl = getPath();
-
-
-function getPath() {
-    var pathName = document.location.pathname;
-    var index = pathName.substr(1).indexOf("/");
-    var result = pathName.substr(0, index + 1);
-    return result;
-}
-
 layui.config({
 	base: 'js/',
 	version:new Date().getTime()
@@ -122,7 +107,7 @@ layui.config({
                 ,id: 'LAY_help' //设定一个id，防止重复弹出
                 ,maxmin: true
                 ,offset: 'rb'
-                ,content: baseUrl + '/help.html'
+                ,content: baseUrl + '/sys/help.html'
 				,skin: 'layui-anim layui-anim-rl layui-layer-adminRight'//样式
                 ,btn: ['关闭']
                 ,yes: function(){
@@ -149,8 +134,8 @@ layui.config({
 				shade: 0.1,
 				shadeClose: true,
 				skin: 'layui-anim layui-anim-rl layui-layer-adminRight',//样式
-				area: '400px',
-				content: baseUrl + '/more.html',
+				area: '300px',
+				content: baseUrl + '/sys/more.html',
 				success:function (layero) {
 					layer.setTop(layero);
 				}

@@ -678,7 +678,7 @@ public class MenuInfServiceImpl extends BaseServiceImpl<TSysMenuInf> implements 
 			if (menuInf.getPid() == null || menuInf.getPid().length() == 0) {
 				rootPid = menuInf.getId();
 				rootTreeForLayUI.setId(menuInf.getId());
-				rootTreeForLayUI.setName(menuInf.getText());
+				rootTreeForLayUI.setTitle(menuInf.getText());
 				rootTreeForLayUI.setIcon(menuInf.getIconCls());
 				rootTreeForLayUI.setSpread(true);
 				rootPid = menuInf.getId();
@@ -692,7 +692,7 @@ public class MenuInfServiceImpl extends BaseServiceImpl<TSysMenuInf> implements 
 				TreeForLayUI object = new TreeForLayUI();
 				object.setId(menuInf.getId());
 				object.setPid(menuInf.getPid());
-				object.setName(menuInf.getText());
+				object.setTitle(menuInf.getText());
 				object.setIcon(menuInf.getIconCls());
 				object.setSpread(true);
 				oneTreeForLayUI.add(object);
@@ -706,15 +706,15 @@ public class MenuInfServiceImpl extends BaseServiceImpl<TSysMenuInf> implements 
 					TreeForLayUI object = new TreeForLayUI();
 					object.setId(menuInf.getId());
 					object.setPid(menuInf.getPid());
-					object.setName(menuInf.getText());
+					object.setTitle(menuInf.getText());
 					object.setIcon(menuInf.getIconCls());
 					object.setSpread(true);
 					twoTreeForLayUI.add(object);
+					treeForLayUI.setChildren(twoTreeForLayUI);
 				}
-				treeForLayUI.setChildren(twoTreeForLayUI);
+
 			}
 		}
-
 		rootTreeForLayUI.setChildren(oneTreeForLayUI);
 		menuInfs.add(rootTreeForLayUI);
 		return menuInfs;
@@ -738,7 +738,7 @@ public class MenuInfServiceImpl extends BaseServiceImpl<TSysMenuInf> implements 
 			if (menuInf.getPid() == null || menuInf.getPid().length() == 0) {
 				rootPid = menuInf.getId();
 				rootTreeForLayUI.setId(menuInf.getId());
-				rootTreeForLayUI.setName(menuInf.getText());
+				rootTreeForLayUI.setTitle(menuInf.getText());
 				rootTreeForLayUI.setIcon(menuInf.getIconCls());
 				rootTreeForLayUI.setSpread(true);
 				rootPid = menuInf.getId();
@@ -752,7 +752,7 @@ public class MenuInfServiceImpl extends BaseServiceImpl<TSysMenuInf> implements 
 				TreeForLayUI object = new TreeForLayUI();
 				object.setId(menuInf.getId());
 				object.setPid(menuInf.getPid());
-				object.setName(menuInf.getText());
+				object.setTitle(menuInf.getText());
 				object.setIcon(menuInf.getIconCls());
 				object.setSpread(true);
 				oneTreeForLayUI.add(object);
@@ -768,7 +768,7 @@ public class MenuInfServiceImpl extends BaseServiceImpl<TSysMenuInf> implements 
 					TreeForLayUI object = new TreeForLayUI();
 					object.setId(menuInf.getId());
 					object.setPid(menuInf.getPid());
-					object.setName(menuInf.getText());
+					object.setTitle(menuInf.getText());
 					object.setIcon(menuInf.getIconCls());
 					object.setSpread(true);
 					childList.add(object);

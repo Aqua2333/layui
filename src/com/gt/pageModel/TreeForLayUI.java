@@ -13,7 +13,7 @@ public class TreeForLayUI  implements java.io.Serializable{
 
 	private String id;// 菜单ID
 	private String pid;// 上一级菜单id
-	private String name;// 基本元素
+	private String title;// 基本元素
 	private String icon;// 图标
 	private boolean spread;// 是否展开
 	//private String href;// URL
@@ -36,12 +36,12 @@ public class TreeForLayUI  implements java.io.Serializable{
 		this.pid = pid;
 	}
 
-	public String getName() {
-		return name;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public String getIcon() {

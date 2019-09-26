@@ -31,8 +31,8 @@
 	
 	<script>
 		layui.use([ 'tree', 'layer' ], function() {
-			var layer = layui.layer, $ = layui.jquery;
-			var nodes;
+			var layer = layui.layer, $ = layui.jquery, tree = layui.tree;
+			var nodes = '';
 			$.ajax({
 				url : '<%=request.getContextPath()%>/menuInf/getLayUItree.do',
 				dataType : 'json',
@@ -42,16 +42,19 @@
 				}
 			});
 			
-			layui.tree({
+			tree.render({
 				elem : '#tree' //指定元素
 				,
+                accordion : true
+                ,
 				target : '_blank' //是否新选项卡打开（比如节点返回href才有效）
 				,
 				click : function(item) { //点击节点回调
-					$("#id").val( item.id);
-					$("#name").val(item.name);
+					$("#id").val( item.data.id);
+					$("#name").val(item.data.title);
+                    console.log(item.data.title)
 				},
-				nodes :nodes
+				data : nodes
 			});
 			
 		});

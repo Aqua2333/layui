@@ -33,24 +33,24 @@
 </head>
 
 <body>
-<div class="layui-layout layui-layout-admin" style="border-bottom: solid 5px #1aa094;">
+<div class="layui-layout layui-layout-admin"  style="border-bottom: solid 5px #01AAED;">
     <div class="layui-header header header-demo">
-        <div class="layui-main">
-            <div class="admin-login-box">
-                <a class="logo" style="left: 0;" href="#"> <span
-                        style="font-size: 22px;">LaySSH开发框架</span>
-                </a>
-                <div class="admin-side-toggle">
-                    <i class="fa fa-bars" aria-hidden="true"></i>
-                </div>
-                <div class="admin-side-full">
-                    <i class="fa fa-life-bouy" aria-hidden="true"></i>
-                </div>
-                <div class="admin-side-helper">
-                    <i class="layui-icon" style="font-size: 14px; color: white;" aria-hidden="true">&#xe607;</i>
-                </div>
+    <div class="layui-main">
+        <div class="admin-login-box">
+            <a class="logo" style="left: 0;" href="#"> <span
+                    style="font-size: 22px;">LaySSH开发框架</span>
+            </a>
+            <div class="admin-side-toggle" aria-hidden="true">
+                <i class="fa fa-bars"  aria-hidden="true"></i>
             </div>
-            <ul class="layui-nav admin-header-item">
+            <div class="admin-side-full"  aria-hidden="true">
+                <i class="fa fa-life-bouy" aria-hidden="true"></i>
+            </div>
+            <div class="admin-side-helper">
+                <i class="layui-icon" style="color: #fff; font-size: 14px" aria-hidden="true">&#xe607;</i>
+            </div>
+        </div>
+            <ul class="layui-nav layui-layout-right">
 
                 <li class="layui-nav-item layui-hide-xs" id="admin-header-theme" lay-unselect>
                     <a href="javascript:;">
@@ -73,17 +73,16 @@
                     </dl>
                 </li>
                 <li class="layui-nav-item layui-hide-xs" id="admin-header-more" lay-unselect>
-                    <i class="layui-icon" style="font-size: 16px; color: #999999" aria-hidden="true">&#xe671;</i>
+                    <i class="layui-icon" style="font-size: 16px; color: #333333" aria-hidden="true">&#xe671;</i>
                 </li>
             </ul>
         </div>
     </div>
-    <div class="layui-side layui-bg-gray" id="admin-side">
+    <div class="layui-side layui-bg-black" id="admin-side">
         <div class="layui-side-scroll" id="admin-navbar-side"
              lay-filter="side"></div>
     </div>
-    <div class="layui-body"
-         style="bottom: 0;border-left: solid 2px #1AA094;" id="admin-body">
+    <div class="layui-body" id="admin-body">
         <div class="layui-tab admin-nav-card layui-tab-brief"
              lay-filter="admin-tab">
             <ul class="layui-tab-title">
@@ -163,6 +162,49 @@
                 }
             });
         });
+    });
+    layui.use('colorpicker',function () {
+       var colorpicker = layui.colorpicker;
+        colorpicker.render({
+            elem: '#admin-header-theme'
+            ,color: ''
+            ,format: 'rgb'
+            ,predefine: true
+            ,alpha: true
+            ,size: "xs"
+            ,done: function(color){
+                layer.msg("换个颜色换种心情");
+            }
+            ,change: function(color){
+                var RgbValue = color.replace("rgba(", "").replace(")", "");
+                var RgbValueArry = RgbValue.split(",");
+                var $grayLevel = RgbValueArry[0] * 0.299 + RgbValueArry[1] * 0.587 + RgbValueArry[2] * 0.114;
+                var thatColor;
+                if ($grayLevel >= 192) {
+                    thatColor = "#000";
+                } else {
+                    thatColor = "#fff";
+                }
+                $('').css('color', thatColor);
+                $('.layui-bg-gray,.layui-side-scroll,.layui-nav-item,.layui-nav-child,div.header').css('background-color', color);
+                layui.data('vaeyoAdmin_theme', {
+                    key: 'color'
+                    ,value: [color,thatColor]
+                });
+                layer.msg("主题设置成功,双击右上角按钮可恢复默认");
+            }
+        });
+
+        $('#vaeyo-color').on('dblclick', function(e){
+            layui.data('vaeyoAdmin_theme', {
+                key: 'color'
+                ,remove: true
+            });
+            $('.vaeyo-menulist,.vaeyo-menulist .vaeyo-menulist-2 .layui-icon,.vaeyo-menulist .vaeyo-menulist-3 .layui-icon').css('color', "#000");
+            $('.layui-layout-admin .layui-header,.vaeyo-tab .layui-tab-title').css('background-color', "#000");
+            $('.layui-layout-admin .layui-side').css('background-color', "#f0f0f0");
+            layer.msg("主题已成功恢复默认");
+        })
     });
 </script>
 </body>
