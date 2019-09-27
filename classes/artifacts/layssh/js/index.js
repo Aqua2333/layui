@@ -118,9 +118,9 @@ layui.config({
                 f2 = false;
                 dblclick();
                 click();
-           		setTimeout(function () {
-					f2 = true;
-				},1000)
+                setTimeout(function () {
+                    f2 = true;
+                }, 1000)
             } else {
                 layer.msg("每秒只可操作一次")
             }
@@ -132,57 +132,44 @@ layui.config({
     });
 
     $('.admin-side-full').on('click', function () {
-        var docElm = document.documentElement, $this = $('.admin-side-full');
-        if ($this.children('i').hasClass('layui-icon-screen-restore')) {
-            let docElm = document;
-            //W3C
-            if (docElm.exitFullscreen) {
-                $this.children('i').removeClass('layui-icon-screen-restore').addClass('layui-icon-screen-full');
-                docElm.exitFullscreen();
-            }
-            //FireFox
-            else if (docElm.mozCancelFullScreen) {
-                $this.children('i').removeClass('layui-icon-screen-restore').addClass('layui-icon-screen-full');
-                docElm.mozCancelFullScreen();
-            }
-            //Chrome等
-            else if (docElm.webkitCancelFullScreen) {
-                $this.children('i').removeClass('layui-icon-screen-restore').addClass('layui-icon-screen-full');
-                docElm.webkitCancelFullScreen();
-            }
-            //IE11
-            else if (docElm.cancelFullScreen) {
-                $this.children('i').removeClass('layui-icon-screen-restore').addClass('layui-icon-screen-full');
-                docElm.cancelFullScreen();
-            } else {
-                $this.children('i').removeClass('layui-icon-screen-restore').addClass('layui-icon-screen-full');
-                layer.msg("按Esc即可退出全屏");
+        var $this = $('.admin-side-full');
+        var explorer = navigator.userAgent.toLowerCase();
+        if (explorer.indexOf("msie") >= 0 || explorer.indexOf('clr') >= 0) {
+            var wscript = new ActiveXObject("WScript.Shell");
+            if (wscript != null) {
+                wscript.SendKeys("{F11}");
             }
         } else {
-            //W3C
-            if (docElm.requestFullscreen) {
-                $this.children('i').removeClass('layui-icon-screen-full').addClass('layui-icon-screen-restore');
-                docElm.requestFullscreen();
-            }
-            //FireFox
-            else if (docElm.mozRequestFullScreen) {
-                $this.children('i').removeClass('layui-icon-screen-full').addClass('layui-icon-screen-restore');
-                docElm.mozRequestFullScreen();
-            }
-            //Chrome等
-            else if (docElm.webkitRequestFullScreen) {
-                $this.children('i').removeClass('layui-icon-screen-full').addClass('layui-icon-screen-restore');
-                docElm.webkitRequestFullScreen();
-            }
-            //IE11
-            else if (docElm.msRequestFullscreen) {
-                $this.children('i').removeClass('layui-icon-screen-full').addClass('layui-icon-screen-restore');
-                docElm.msRequestFullscreen();
+            if ($this.children('i').hasClass('layui-icon-screen-restore')) {
+                if (document.exitFullscreen) {
+                    $this.children('i').removeClass('layui-icon-screen-restore').addClass('layui-icon-screen-full');
+                    document.exitFullscreen();
+                } else if (document.mozCancelFullScreen) {
+                    $this.children('i').removeClass('layui-icon-screen-restore').addClass('layui-icon-screen-full');
+                    document.mozCancelFullScreen();
+                } else if (document.webkitCancelFullScreen) {
+                    $this.children('i').removeClass('layui-icon-screen-restore').addClass('layui-icon-screen-full');
+                    document.webkitCancelFullScreen();
+                } else if (document.msExitFullscreen) {
+                    $this.children('i').removeClass('layui-icon-screen-restore').addClass('layui-icon-screen-full');
+                    document.msExitFullscreen();
+                } else {
+                    $this.children('i').removeClass('layui-icon-screen-restore').addClass('layui-icon-screen-full');
+                    layer.msg("按Esc即可退出全屏");
+                }
             } else {
-                layer.msg('很抱歉，该浏览器不支持全屏API或已被禁用');
-            }
+                var ele = document.documentElement
+                    , reqFullScreen = ele.requestFullScreen || ele.webkitRequestFullScreen
+                    || ele.mozRequestFullScreen || ele.msRequestFullscreen;
+                if (typeof reqFullScreen !== 'undefined' && reqFullScreen) {
+                    reqFullScreen.call(ele);
+                    $this.children('i').removeClass('layui-icon-screen-full').addClass('layui-icon-screen-restore');
+                } else {
+                    layer.msg('很抱歉，该浏览器不支持全屏API或已被禁用');
+                }
 
-            layer.msg('按Esc即可退出全屏');
+                layer.msg('按Esc即可退出全屏');
+            }
         }
     });
 
@@ -342,7 +329,8 @@ layui.use('colorpicker', function () {
     var colorpicker = layui.colorpicker;
     var theme = layui.data('lay_theme').color;
     if (theme) {
-        $('.layui-nav-item>a,div.admin-login-box>a,#admin-header-more,#main_user,.admin-side-full,.admin-side-toggle,.admin-side-helper').css('color', theme[1]);
+        $('div.admin-login-box>a,#admin-header-more,#main_user,.admin-side-full,.admin-side-toggle,.admin-side-helper').css('color',theme[2]);
+        $('.layui-nav-item>a').css('color', theme[1]);
         var user = $('#main_user');
         if (user.css('color') === 'rgb(51, 51, 51)') {
             $(user.css('color', '#999999'))
@@ -360,20 +348,28 @@ layui.use('colorpicker', function () {
             layer.msg("换个颜色换种心情");
         }
         , change: function (color) {
+            console.log(color);
             var RgbValue = color.replace("rgba(", "").replace(")", "");
             var RgbValueArry = RgbValue.split(",");
             var $grayLevel = RgbValueArry[0] * 0.299 + RgbValueArry[1] * 0.587 + RgbValueArry[2] * 0.114;
+            var headerColor;
             var thatColor;
             if ($grayLevel >= 192) {
                 thatColor = "#000";
             } else {
                 thatColor = "#fff";
             }
-            $('.layui-nav-item>a,div.admin-login-box>a,#admin-header-more,#main_user,.admin-side-full,.admin-side-toggle,.admin-side-helper').css('color', thatColor);
+            if (RgbValueArry[3] < 0.3){
+                headerColor = "#000";
+            } else {
+                headerColor = thatColor;
+            }
+            $('div.admin-login-box>a,#admin-header-more,#main_user,.admin-side-full,.admin-side-toggle,.admin-side-helper').css(headerColor);
+            $('.layui-nav-item>a').css('color', thatColor);
             $('.layui-bg-black,.layui-side-scroll,.layui-side-scroll .layui-nav-child,div.header').css('background-color', color);
             layui.data('lay_theme', {
                 key: 'color'
-                , value: [color, thatColor]
+                , value: [color, thatColor,headerColor]
             });
             layer.msg("主题设置成功,双击右上角按钮可恢复默认");
         }
@@ -397,13 +393,14 @@ layui.use('colorpicker', function () {
 });
 $(function () {
     var $this = $('.admin-side-full');
-    if ($this.children('i').hasClass('layui-icon-screen-restore')) {
-        $(window).on('keydown', function (event) {
-            var code = (event.keyCode ? event.keyCode : event.which);
-            alert(code);
-            if (code === 27 || code === 13) {
+    $(document).on('keydown', function (event) {
+        var code = event || window.event || arguments.callee.caller.arguments[0];
+        if (code.keyCode  === 122) {
+            if ($this.children('i').hasClass('layui-icon-screen-restore')) {
                 $this.children('i').removeClass('layui-icon-screen-restore').addClass('layui-icon-screen-full');
+            } else {
+                $this.children('i').removeClass('layui-icon-screen-full').addClass('layui-icon-screen-restore');
             }
-        });
-    }
+        }
+    });
 });

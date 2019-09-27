@@ -9,7 +9,7 @@
 <!-- layUI -->
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-3.2.0.min.js"></script>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/plugins/layui-v2/css/layui.css" media="all" />
-<script type="text/javascript"src="<%=request.getContextPath()%>/plugins/layui-v2/layui.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/plugins/layui-v2/layui.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/public.js"></script>
 <!-- 公共组件 -->
 <jsp:include page="plugins/my/pbPlugins.jsp"></jsp:include>
