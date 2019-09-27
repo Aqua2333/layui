@@ -34,28 +34,25 @@
 
 <body>
 <div class="layui-layout layui-layout-admin"  style="border-bottom: solid 5px #01AAED;">
-    <div class="layui-header header header-demo">
+    <div class="layui-header header header-demo" id="admin-header">
     <div class="layui-main">
         <div class="admin-login-box">
-            <a class="logo" style="left: 0;" href="#"> <span
+            <a class="logo" data-url="wecome.jsp" id="logo"> <span
                     style="font-size: 22px;">LaySSH开发框架</span>
             </a>
             <div class="admin-side-toggle" aria-hidden="true">
-                <i class="fa fa-bars"  aria-hidden="true"></i>
+                <i class="layui-icon layui-icon-shrink-right"  aria-hidden="true"></i>
             </div>
             <div class="admin-side-full"  aria-hidden="true">
-                <i class="fa fa-life-bouy" aria-hidden="true"></i>
+                <i class="layui-icon layui-icon-screen-full" aria-hidden="true"></i>
             </div>
             <div class="admin-side-helper">
-                <i class="layui-icon" style="color: #fff; font-size: 14px" aria-hidden="true">&#xe607;</i>
+                <i class="layui-icon layui-icon-tips" aria-hidden="true"></i>
             </div>
         </div>
             <ul class="layui-nav layui-layout-right">
 
                 <li class="layui-nav-item layui-hide-xs" id="admin-header-theme" lay-unselect>
-                    <a href="javascript:;">
-                    <i class="layui-icon" style="font-size: 16px" aria-hidden="true">&#xe66a;</i>
-                    </a>
                 </li>
                 <li class="layui-nav-item layui-hide-xs" lay-unselect><a href="javascript:;"
                                               class="admin-header-user"> <img src="images/0.jpg"/> <span
@@ -72,7 +69,7 @@
                         </dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item layui-hide-xs" id="admin-header-more" lay-unselect>
+                <li class="layui-nav-item layui-hide-xs" id="admin-header-more" style="color: #333333" lay-unselect>
                     <i class="layui-icon" style="font-size: 16px;" aria-hidden="true">&#xe671;</i>
                 </li>
             </ul>
@@ -82,11 +79,11 @@
         <div class="layui-side-scroll" id="admin-navbar-side"
              lay-filter="side"></div>
     </div>
-    <div class="layui-body" id="admin-body">
+    <div class="layui-body" style="bottom: 0;border-left: solid 2px #01AAED;" id="admin-body">
         <div class="layui-tab admin-nav-card layui-tab-brief"
              lay-filter="admin-tab">
-            <ul class="layui-tab-title">
-                <li class="layui-this"><i class="fa fa-dashboard"
+            <ul class="layui-tab-title" id="tab-title">
+                <li class="layui-this" id="homePage"><i class="fa fa-dashboard"
                                           aria-hidden="true"></i> <cite>首页</cite></li>
             </ul>
             <div class="layui-tab-content"
@@ -167,7 +164,11 @@
        var colorpicker = layui.colorpicker;
         var theme = layui.data('lay_theme').color;
         if(theme){
-            $('.layui-nav-item>a,div.admin-login-box>a,#admin-header-more,#main_user').css('color', theme[1]);
+            $('.layui-nav-item>a,div.admin-login-box>a,#admin-header-more,#main_user,.admin-side-full,.admin-side-toggle,.admin-side-helper').css('color', theme[1]);
+            var user =  $('#main_user');
+            if(user.css('color') === 'rgb(51, 51, 51)'){
+                $(user.css('color','#999999'))
+            }
             $('.layui-bg-black,.layui-side-scroll,.layui-side-scroll .layui-nav-child,div.header').css('background-color', theme[0]);
         }
         colorpicker.render({
@@ -190,7 +191,7 @@
                 } else {
                     thatColor = "#fff";
                 }
-                $('.layui-nav-item>a,div.admin-login-box>a,#admin-header-more,#main_user').css('color', thatColor);
+                $('.layui-nav-item>a,div.admin-login-box>a,#admin-header-more,#main_user,.admin-side-full,.admin-side-toggle,.admin-side-helper').css('color', thatColor);
                 $('.layui-bg-black,.layui-side-scroll,.layui-side-scroll .layui-nav-child,div.header').css('background-color', color);
                 layui.data('lay_theme', {
                     key: 'color'
@@ -205,11 +206,14 @@
                 key: 'color'
                 ,remove: true
             });
-            $('div.admin-login-box>a,#admin-header-more,#main_user').css('color', "#333333");
-            $('.layui-nav-item>a').css('color', "rgba(255,253,255,0.7)");
-            $('.layui-bg-black,.layui-side-scroll').css('background-color', "#393D49");
-            $('.layui-side-scroll .layui-nav-child').css('background-color', "rgba(0,0,0,0.3)");
-            $('div.header').css('background-color', "#fff");
+            $('.layui-nav-item>a,div.admin-login-box>a,#admin-header-more,#main_user,.admin-side-full,.admin-side-toggle,.admin-side-helper').removeAttr('style');
+            $('.layui-bg-black,.layui-side-scroll,.layui-side-scroll .layui-nav-child,div.header').removeAttr('style');
+            $('#admin-header-more').css('color', "#333333");
+            // $('#main_user').css('color','#999999');
+            // $('.layui-nav-item>a').css('color', "rgba(255,253,255,0.7)");
+            // $('.layui-bg-black,.layui-side-scroll').css('background-color', "#393D49");
+            // $('.layui-side-scroll .layui-nav-child').css('background-color', "rgba(0,0,0,0.3)");
+            // $('div.header').css('background-color', "#fff");
             layer.msg("主题已成功恢复默认");
         })
     });

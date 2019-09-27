@@ -28,6 +28,7 @@ import com.gt.utils.DataConverter;
 import com.gt.utils.MapToBeanUtils;
 import com.gt.utils.PbUtils;
 import com.gt.utils.ReadFile;
+import sun.reflect.generics.tree.Tree;
 
 /**
  * 
@@ -772,14 +773,28 @@ public class MenuInfServiceImpl extends BaseServiceImpl<TSysMenuInf> implements 
 					object.setIcon(menuInf.getIconCls());
 					object.setSpread(true);
 					childList.add(object);
+					twoTreeForLayUI.add(object);
 				}
 			}
 			treeForLayUI.setChildren(childList);
-
-			twoTreeForLayUI.add(treeForLayUI);
+		}
+		for (TreeForLayUI treeForLayUI : twoTreeForLayUI) {
+			List<TreeForLayUI> childList = new ArrayList<TreeForLayUI>();
+			for (MenuInf menuInf : tl) {
+				if (menuInf.getPid() != null && menuInf.getPid().length() > 0 && treeForLayUI.getId().equals(menuInf.getPid())) {
+					TreeForLayUI object = new TreeForLayUI();
+					object.setId(menuInf.getId());
+					object.setPid(menuInf.getPid());
+					object.setTitle(menuInf.getText());
+					object.setIcon(menuInf.getIconCls());
+					object.setSpread(true);
+					childList.add(object);
+				}
+			}
+			treeForLayUI.setChildren(childList);
 		}
 
-		rootTreeForLayUI.setChildren(twoTreeForLayUI);
+		rootTreeForLayUI.setChildren(oneTreeForLayUI);
 		menuInfs.add(rootTreeForLayUI);
 		return menuInfs;
 	}

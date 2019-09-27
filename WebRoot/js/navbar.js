@@ -101,31 +101,39 @@ layui.define(['element', 'common'], function (exports) {
             }
         }
 
+        // 菜单栏的渐进渐出
+
         var $ul = $container.children('ul');
         $ul.find('li.layui-nav-item').each(function () {
             $(this).on('click', function () {
                 $(this).children('a').children('i').html(($(this).hasClass('layui-nav-itemed') ? '&#xe61a;' : '&#xe602;'));
+                var c = $(this).children('dl');
+                ($(this).hasClass('layui-nav-itemed') || c.css("display") === 'hide') ? c.slideDown() : c.slideUp();
                 // 只开启一个二级菜单
                 if (_config.spreadOne) {
+                    $(this).siblings().children('dl').slideUp();
                     $(this).siblings().removeClass('layui-nav-itemed');
                     $(this).siblings().children('a').children('i').html('&#xe602;');
                 }
             });
         });
 
-
         $container.find('dd.two').each(function () {
             $(this).on('click', function () {
                 if ($(this).children('dl').length > 0) {
                     $(this).children('a').children('i').html(($(this).hasClass('layui-nav-itemed') ? '&#xe61a;' : '&#xe602;'));
+                    var c = $(this).children('dl');
+                    ($(this).hasClass('layui-nav-itemed') || c.css("display") === 'hide') ? c.slideDown() : c.slideUp();
                     // 只开启一个三级菜单
                     if (_config.spreadOneThird) {
+                        $(this).siblings().children('dl').slideUp();
                         $(this).siblings().removeClass('layui-nav-itemed');
                         $(this).siblings().children('a').children('i').html('&#xe602;');
                     }
                 }
             })
-        })
+        });
+
 
         return _that;
     };
@@ -204,6 +212,7 @@ layui.define(['element', 'common'], function (exports) {
      * @param {Object} data
      */
     function getHtml(data) {
+        // spread字段不使用 菜单不展开
         var ulHtml = '<ul class="layui-nav layui-nav-tree beg-navbar">';
         for (var i = 0; i < data.length; i++) {
             ulHtml += '<li class="layui-nav-item">';

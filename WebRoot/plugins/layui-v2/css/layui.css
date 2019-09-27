@@ -1730,7 +1730,7 @@ a cite {
 }
 
 .layui-bg-green {
-    background-color: #01AAEB !important
+    background-color: #009688 !important
 }
 
 .layui-bg-cyan {
@@ -3569,10 +3569,6 @@ body .layui-table-tips .layui-layer-content {
 }
 
 
-.layui-nav-child .layui-nav-child dd a{
-
-}
-
 .layui-nav .layui-nav-item a {
     display: block;
     padding: 0 20px;
@@ -3744,13 +3740,13 @@ body .layui-table-tips .layui-layer-content {
 }
 
 .layui-nav-itemed > .layui-nav-child {
-    display: block;
+    /*display: block;*/
     padding: 0;
    /* background-color: rgba(0, 0, 0, .3) !important*/
 }
 
 .layui-nav-itemed > .layui-nav-child > .layui-this > .layui-nav-child {
-    display: block
+    /*display: block*/
 }
 
 .layui-nav-side {

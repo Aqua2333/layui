@@ -29,7 +29,7 @@
 .header-index{background-color: #080018; border: none;}
 
 .layui-layout-admin .header-demo{border-bottom-color: #01AAED; background-color: #fff;}
-.header-demo .logo{left: 40px;}
+.header-demo .logo{left: 0;}
 .header-demo .layui-nav{top: 0;}
 .header-demo .layui-nav .layui-nav-item{margin: 0 10px; line-height: 65px;}
 .header-demo .layui-nav .layui-nav-item a{color: #999;}
@@ -334,41 +334,33 @@ body .site-demo-nav .layui-nav-item{line-height: 40px}
 /**/
 .admin-main {margin: 15px;}
 
-.admin-side-toggle,.admin-side-full{
+.admin-side-toggle,.admin-side-full,.admin-side-helper{
 	position: absolute; cursor: pointer;
     z-index: 19980716;
     left: 200px;
     color: white;
+    font-size: 14px;
+    background-color: #01AAEB;
     text-align: center;
     width: 30px;
     height: 30px;
-    background-color: #01AAED;
     line-height: 30px;
     top: 25%;
 }
 .admin-side-toggle:hover{
-	background-color: #5FB878;
+    color: #999999;
 }
 .admin-side-full{
 	left: 240px;
 }
 .admin-side-full:hover{
-    background-color: #5FB878;
+    color: #999999;
 }
 .admin-side-helper:hover{
-    background-color: #5FB878;
+    color: #999999;
 }
 .admin-side-helper{
-    position: absolute; cursor: pointer;
-    z-index: 19980716;
-    left: 280px;
-    color: white;
-    text-align: center;
-    width: 30px;
-    height: 30px;
-    background-color: #01AAED;
-    line-height: 30px;
-    top: 25%;
+   left: 280px;
 }
 .admin-login-box{
 	width: 185px; height: 70px; position: relative;
@@ -398,7 +390,7 @@ body .site-demo-nav .layui-nav-item{line-height: 40px}
 @media screen and (max-width: 750px) {
   .layui-main{width: auto; margin: 0 10px;}
   .logo,
-  .header-demo .logo{left: 10px;}
+  .header-demo .logo{left: 0;}
 
   .site-nav-layim{display: none !important;}
   .header .layui-nav .layui-nav-item{margin: 0;}
