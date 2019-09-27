@@ -329,8 +329,8 @@ layui.use('colorpicker', function () {
     var colorpicker = layui.colorpicker;
     var theme = layui.data('lay_theme').color;
     if (theme) {
-        $('div.admin-login-box>a,#admin-header-more,#main_user,.admin-side-full,.admin-side-toggle,.admin-side-helper').css('color',theme[2]);
-        $('.layui-nav-item>a').css('color', theme[1]);
+        $('div.admin-login-box>a,#admin-header-more,#main_user').css('color',theme[2]);
+        $('.layui-nav-item>a,.admin-side-full,.admin-side-toggle,.admin-side-helper').css('color', theme[1]);
         var user = $('#main_user');
         if (user.css('color') === 'rgb(51, 51, 51)') {
             $(user.css('color', '#999999'))
@@ -348,7 +348,6 @@ layui.use('colorpicker', function () {
             layer.msg("换个颜色换种心情");
         }
         , change: function (color) {
-            console.log(color);
             var RgbValue = color.replace("rgba(", "").replace(")", "");
             var RgbValueArry = RgbValue.split(",");
             var $grayLevel = RgbValueArry[0] * 0.299 + RgbValueArry[1] * 0.587 + RgbValueArry[2] * 0.114;
@@ -364,8 +363,8 @@ layui.use('colorpicker', function () {
             } else {
                 headerColor = thatColor;
             }
-            $('div.admin-login-box>a,#admin-header-more,#main_user,.admin-side-full,.admin-side-toggle,.admin-side-helper').css(headerColor);
-            $('.layui-nav-item>a').css('color', thatColor);
+            $('div.admin-login-box>a,#admin-header-more,#main_user').css(headerColor);
+            $('.layui-nav-item>a,.admin-side-full,.admin-side-toggle,.admin-side-helper').css('color', thatColor);
             $('.layui-bg-black,.layui-side-scroll,.layui-side-scroll .layui-nav-child,div.header').css('background-color', color);
             layui.data('lay_theme', {
                 key: 'color'
