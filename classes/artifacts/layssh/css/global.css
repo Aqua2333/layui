@@ -40,6 +40,18 @@
 .header-demo .layui-nav-bar{background-color: #393D49;}
 .header-demo .layui-nav .layui-this a{padding: 0 20px;}
 
+/* 锁屏 */
+.admin-header-lock{width: 320px; height: 170px; padding: 20px; position: relative; text-align: center;}
+.admin-header-lock-img{width:70px; height:70px; margin: 0 auto;}
+.admin-header-lock-img img{width:70px; height:70px; border-radius: 100%; box-shadow:0 0 30px #44576b;}
+.admin-header-lock-name{color: #009688;margin: 8px 0 15px 0;}
+.input_btn{ overflow: hidden; margin-bottom: 10px; }
+.admin-header-lock-input{width: 170px; color: #fff;background-color: #009688; float: left; margin:0 10px 0 40px; border:none;}
+.admin-header-lock-input::-webkit-input-placeholder {color:#fff;}
+.admin-header-lock-input::-moz-placeholder {color:#fff;}
+.admin-header-lock-input:-ms-input-placeholder {color:#fff;}
+.admin-header-lock-input:-moz-placeholder {color:#fff;}
+#unlock{ float: left; }
 /* 底部 */
 .footer{padding: 30px 0; line-height: 30px; text-align: center; background-color: #eee; color: #666; font-weight: 300;}
 body .layui-layout-admin .footer-demo{height: auto; padding: 5px 0; line-height: 26px;}
@@ -322,7 +334,7 @@ body .site-demo-nav .layui-nav-item{line-height: 40px}
     color: #01AAEB;margin: 8px 0 15px 0;
 }
 .admin-header-lock-input{
-    width: 150px; color: #FFFFFF; height: 30px; border: 0;background-color: #01AAEB; padding: 0 7px; border-radius: 2px;
+    width: 150px; color: #FFFFFF; height: 38px; border: 0;background-color: #01AAEB; padding: 0 7px; border-radius: 2px;
 }
 /*table*/
 .site-table tbody tr td {text-align: center;}
@@ -334,6 +346,20 @@ body .site-demo-nav .layui-nav-item{line-height: 40px}
 /**/
 .admin-main {margin: 15px;}
 
+.admin-lock{
+    color: #999999;
+    font-size: 16px;
+    right: 10px;
+}
+.admin-lock:hover{
+    color: #000000;
+}
+#admin-header-more{
+    color: #999999;
+}
+admin-header-more:hover{
+    color: #000000;
+}
 .admin-side-toggle,.admin-side-full,.admin-side-helper{
 	position: absolute; cursor: pointer;
     z-index: 19980716;

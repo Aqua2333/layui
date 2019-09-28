@@ -51,7 +51,9 @@
                 </div>
             </div>
             <ul class="layui-nav layui-layout-right">
-
+                <li class="layui-nav-item layui-hide-xs admin-lock" id="admin-lock" lay-unselect>
+                    <i class="layui-icon layui-icon-password">锁屏</i>
+                </li>
                 <li class="layui-nav-item layui-hide-xs" id="admin-header-theme" lay-unselect>
                 </li>
                 <li class="layui-nav-item layui-hide-xs" lay-unselect><a href="javascript:;"
@@ -70,7 +72,7 @@
                         </dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item layui-hide-xs" id="admin-header-more" style="color: #333333" lay-unselect>
+                <li class="layui-nav-item layui-hide-xs" id="admin-header-more" lay-unselect>
                     <i class="layui-icon" style="font-size: 16px;" aria-hidden="true">&#xe671;</i>
                 </li>
             </ul>

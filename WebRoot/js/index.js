@@ -206,6 +206,11 @@ layui.config({
         })
     });
 
+    //锁屏
+    $('#admin-lock').on('click', function () {
+       lock($,layer);
+    });
+
     $('#admin-header-more').on('click', function () {
         var layer = layui.layer;
         layer.open({
@@ -227,7 +232,7 @@ layui.config({
     });
 
     var $this = $('.admin-side-full');
-    $(document).on('keydown', function (event) {
+    $(window).on('keydown', function (event) {
         var code = event || window.event || arguments.callee.caller.arguments[0];
         if (code.keyCode === 122) {
             if ($this.children('i').hasClass('layui-icon-screen-restore')) {
@@ -237,13 +242,17 @@ layui.config({
             }
         } else if (code.keyCode === 76 && code.altKey) {
             lock($, layer);
+        } else if (code.keyCode === 13){
+            $("#unlock").click();
         }
     });
 
     $('#lock').on('click', function () {
         lock($, layer);
     });
-
+    if (isShowLock){
+        lock($,layer);
+    }
     //手机设备的简单适配
     var treeMobile = $('.site-tree-mobile'),
         shadeMobile = $('.site-mobile-shade');
@@ -255,92 +264,66 @@ layui.config({
     });
 });
 
+var isShowLock = layui.data('lay_lock').lock;
 
-var isShowLock = false;
-
+var username = $("#main_user").text();
 function lock($, layer) {
-    if (isShowLock)
-        return;
     //自定页
     layer.open({
-        title: false,
-        type: 1,
-        closeBtn: 0,
-        anim: 6,
-        //content: $('#lock-temp').html(),
-        content: ['lock.jsp', 'no'],
-        shade: [0.9, '#393D49'],
-        success: function (layero, lockIndex) {
-            isShowLock = true;
-            //给显示用户名赋值
-            layero.find('div#lockUserName').text($("#main_user").html());
-            layero.find('input[name=lockPwd]').on('focus', function () {
-                var $this = $(this);
-                if ($this.val() === '输入密码解锁..') {
-                    $this.val('').attr('type', 'password');
-                }
+        title : false,
+        type : 1,
+        content : '<div class="admin-header-lock" id="lock-box">'+
+            '<div class="admin-header-lock-img"><img src="images/0.jpg" class="userAvatar"/></div>'+
+            '<div class="admin-header-lock-name" id="lockUserName">'+username+'</div>'+
+            '<div class="input_btn">'+
+            '<input type="password" class="admin-header-lock-input layui-input" autocomplete="off" placeholder="请输入密码解锁.." name="lockPwd" id="lockPwd" />'+
+            '<button class="layui-btn" id="unlock">解锁</button>'+
+            '</div>'+
+            '<p>测试界面，任意输入即可解锁</p>' +
+            '</div>',
+        closeBtn : 0,
+        shade : 0.9,
+        success : function(){
+            layui.data('lay_lock',{
+                key : 'lock'
+                , value: true
             })
-                .on('blur', function () {
-                    var $this = $(this);
-                    if ($this.val() === '' || $this.length === 0) {
-                        $this.attr('type', 'text').val('输入密码解锁..');
-                    }
-                });
-            //在此处可以写一个请求到服务端删除相关身份认证，因为考虑到如果浏览器被强制刷新的时候，身份验证还存在的情况
-            //do something...
-            //e.g.
-            /*
-             $.post(url,params,callback,'json');
-             */
-            //绑定解锁按钮的点击事件
-            layero.find('button#unlock').on('click', function () {
-                var $lockBox = $('div#lock-box');
-
-                var userName = $lockBox.find('div#lockUserName').text();
-                var pwd = $lockBox.find('input[name=lockPwd]').val();
-                if (pwd === '输入密码解锁..' || pwd.length === 0) {
-                    layer.msg('请输入密码..', {
-                        icon: 2,
-                        time: 1000
-                    });
-                    return;
-                }
-                unlock(userName, pwd);
-            });
-            /**
-             * 解锁操作方法
-             * @param {String} 用户名
-             * @param {String} 密码
-             */
-            var unlock = function (un, pwd) {
-                //这里可以使用ajax方法解锁
-                /*$.post('api/xx',{username:un,password:pwd},function(data){
-                     //验证成功
-                    if(data.success){
-                        //关闭锁屏层
-                        layer.close(lockIndex);
-                    }else{
-                        layer.msg('密码输入错误..',{icon:2,time:1000});
-                    }
-                },'json');
-                */
-                isShowLock = false;
-                //演示：默认输入密码都算成功
-                //关闭锁屏层
-                layer.close(lockIndex);
-            };
         }
     });
+    $(".admin-header-lock-input").focus();
 };
+// 解锁
+$("body").on("click","#unlock",function(){
+    var $this = $(this).siblings(".admin-header-lock-input");
+    if($this.val() === '' || $this.val().length === 0 || typeof ($this.val()) === 'undefined'){
+        layer.msg("请输入解锁密码！");
+        $(this).siblings(".admin-header-lock-input").focus();
+    }else{
+        if($this.val().length > 0){
+            window.sessionStorage.setItem("lockcms",false);
+            $(this).siblings(".admin-header-lock-input").val('');
+            layui.data('lay_lock',{
+                key : 'lock'
+                , value: false
+            });
+            layer.closeAll("page");
+        }else{
+            layer.msg("密码错误，请重新输入！");
+            $(this).siblings(".admin-header-lock-input").val('').focus();
+        }
+    }
+});
 layui.use('colorpicker', function () {
     var colorpicker = layui.colorpicker;
     var theme = layui.data('lay_theme').color;
     if (theme) {
-        $('div.admin-login-box>a,#admin-header-more,#main_user').css('color', theme[2]);
+        $('div.admin-login-box>a,#admin-header-more,#main_user,#admin-lock').css('color', theme[2]);
         $('.layui-nav-item>a,.admin-side-full,.admin-side-toggle,.admin-side-helper').css('color', theme[1]);
         var user = $('#main_user');
         if (user.css('color') === 'rgb(51, 51, 51)') {
-            $(user.css('color', '#999999'))
+            user.css('color', '#999999');
+            $("#admin-lock").css('color', '#999999');
+            $('#admin-header-more').css('color', '#999999')
         }
         $('.layui-bg-black,.layui-side-scroll,.layui-side-scroll .layui-nav-child,div.header').css('background-color', theme[0]);
     }
@@ -365,14 +348,12 @@ layui.use('colorpicker', function () {
             } else {
                 thatColor = "#fff";
             }
-
             if (Number(RgbValueArry[3]) < 0.3) {
                 headerColor = "#000";
             } else {
                 headerColor = thatColor;
             }
-            console.log(thatColor,Number(RgbValueArry[3]),headerColor);
-            $('div.admin-login-box>a,#admin-header-more,#main_user').css('color',headerColor);
+            $('div.admin-login-box>a,#admin-header-more,#main_user,#admin-lock').css('color',headerColor);
             $('.layui-nav-item>a,.admin-side-full,.admin-side-toggle,.admin-side-helper').css('color', thatColor);
             $('.layui-bg-black,.layui-side-scroll,.layui-side-scroll .layui-nav-child,div.header').css('background-color', color);
             layui.data('lay_theme', {
@@ -388,9 +369,8 @@ layui.use('colorpicker', function () {
             key: 'color'
             , remove: true
         });
-        $('.layui-nav-item>a,div.admin-login-box>a,#admin-header-more,#main_user,.admin-side-full,.admin-side-toggle,.admin-side-helper').removeAttr('style');
+        $('.layui-nav-item>a,div.admin-login-box>a,#admin-header-more,#main_user,.admin-side-full,.admin-side-toggle,.admin-side-helper,#admin-lock').removeAttr('style');
         $('.layui-bg-black,.layui-side-scroll,.layui-side-scroll .layui-nav-child,div.header').removeAttr('style');
-        $('#admin-header-more').css('color', "#333333");
         // $('#main_user').css('color','#999999');
         // $('.layui-nav-item>a').css('color', "rgba(255,253,255,0.7)");
         // $('.layui-bg-black,.layui-side-scroll').css('background-color', "#393D49");
