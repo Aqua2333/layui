@@ -1,4 +1,19 @@
 /** navbar.js By Beginner Emain:zheng_jinfan@126.com HomePage:http://www.zhengjinfan.cn */
+
+/**
+ * 获取项目根路径
+ * @returns {string}
+ */
+var baseUrl = getPath();
+
+
+function getPath() {
+    var pathName = document.location.pathname;
+    var index = pathName.substr(1).indexOf("/");
+    var result = pathName.substr(0, index + 1);
+    return result;
+}
+
 layui.define(['element', 'common'], function (exports) {
     "use strict";
     var $ = layui.jquery,
@@ -222,8 +237,8 @@ layui.define(['element', 'common'], function (exports) {
                 ulHtml += '<cite>' + data[i].title + '</cite>'
                 ulHtml += '</a>';
                 ulHtml += '<dl class="layui-nav-child">'
-                for (let j = 0; j < data[i].children.length; j++) {
-                    let child = data[i].children[j];
+                for (var j = 0; j < data[i].children.length; j++) {
+                    var child = data[i].children[j];
                     ulHtml += '<dd title="' + data[i].children[j].title + '" class="two">';
                     if (child !== undefined && child.children.length > 0) {
                         ulHtml += '<a href="javascript:;">';
@@ -231,7 +246,7 @@ layui.define(['element', 'common'], function (exports) {
                         ulHtml += '<cite>' + data[i].children[j].title + '</cite>'
                         ulHtml += '</a>';
                         ulHtml += '<dl class="layui-nav-child">'
-                        for (let x = 0; x < child.children.length; x++) {
+                        for (var x = 0; x < child.children.length; x++) {
                             ulHtml += '<dd title="' + child.children[x].title + '">';
                             ulHtml += '<a href="javascript:;" data-url="' + child.children[x].href + '">';
                             ulHtml += '<i class="layui-icon" >&#xe602;</i>';

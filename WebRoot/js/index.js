@@ -225,14 +225,21 @@ layui.config({
             }
         })
     });
-    //锁屏
-    $(document).on('keydown', function () {
-        var e = window.event;
-        if (e.keyCode === 76 && e.altKey) {
-            //alert("你按下了alt+l");
+
+    var $this = $('.admin-side-full');
+    $(document).on('keydown', function (event) {
+        var code = event || window.event || arguments.callee.caller.arguments[0];
+        if (code.keyCode === 122) {
+            if ($this.children('i').hasClass('layui-icon-screen-restore')) {
+                $this.children('i').removeClass('layui-icon-screen-restore').addClass('layui-icon-screen-full');
+            } else {
+                $this.children('i').removeClass('layui-icon-screen-full').addClass('layui-icon-screen-restore');
+            }
+        } else if (code.keyCode === 76 && code.altKey) {
             lock($, layer);
         }
     });
+
     $('#lock').on('click', function () {
         lock($, layer);
     });
@@ -329,7 +336,7 @@ layui.use('colorpicker', function () {
     var colorpicker = layui.colorpicker;
     var theme = layui.data('lay_theme').color;
     if (theme) {
-        $('div.admin-login-box>a,#admin-header-more,#main_user').css('color',theme[2]);
+        $('div.admin-login-box>a,#admin-header-more,#main_user').css('color', theme[2]);
         $('.layui-nav-item>a,.admin-side-full,.admin-side-toggle,.admin-side-helper').css('color', theme[1]);
         var user = $('#main_user');
         if (user.css('color') === 'rgb(51, 51, 51)') {
@@ -358,17 +365,19 @@ layui.use('colorpicker', function () {
             } else {
                 thatColor = "#fff";
             }
-            if (RgbValueArry[3] < 0.3){
+
+            if (Number(RgbValueArry[3]) < 0.3) {
                 headerColor = "#000";
             } else {
                 headerColor = thatColor;
             }
-            $('div.admin-login-box>a,#admin-header-more,#main_user').css(headerColor);
+            console.log(thatColor,Number(RgbValueArry[3]),headerColor);
+            $('div.admin-login-box>a,#admin-header-more,#main_user').css('color',headerColor);
             $('.layui-nav-item>a,.admin-side-full,.admin-side-toggle,.admin-side-helper').css('color', thatColor);
             $('.layui-bg-black,.layui-side-scroll,.layui-side-scroll .layui-nav-child,div.header').css('background-color', color);
             layui.data('lay_theme', {
                 key: 'color'
-                , value: [color, thatColor,headerColor]
+                , value: [color, thatColor, headerColor]
             });
             layer.msg("主题设置成功,双击右上角按钮可恢复默认");
         }
@@ -389,17 +398,4 @@ layui.use('colorpicker', function () {
         // $('div.header').css('background-color', "#fff");
         layer.msg("主题已成功恢复默认");
     })
-});
-$(function () {
-    var $this = $('.admin-side-full');
-    $(document).on('keydown', function (event) {
-        var code = event || window.event || arguments.callee.caller.arguments[0];
-        if (code.keyCode  === 122) {
-            if ($this.children('i').hasClass('layui-icon-screen-restore')) {
-                $this.children('i').removeClass('layui-icon-screen-restore').addClass('layui-icon-screen-full');
-            } else {
-                $this.children('i').removeClass('layui-icon-screen-full').addClass('layui-icon-screen-restore');
-            }
-        }
-    });
 });
