@@ -265,9 +265,13 @@ layui.config({
 });
 
 var isShowLock = layui.data('lay_lock').lock;
-
+var isLock = false;
 var username = $("#main_user").text();
 function lock($, layer) {
+    if (isLock){
+        layer.msg("请勿重复操作...");
+        return;
+    }
     //自定页
     layer.open({
         title : false,
@@ -279,11 +283,11 @@ function lock($, layer) {
             '<input type="password" class="admin-header-lock-input layui-input" autocomplete="off" placeholder="请输入密码解锁.." name="lockPwd" id="lockPwd" />'+
             '<button class="layui-btn" id="unlock">解锁</button>'+
             '</div>'+
-            '<p>测试界面，任意输入即可解锁</p>' +
             '</div>',
         closeBtn : 0,
         shade : 0.9,
         success : function(){
+            isLock = true;
             layui.data('lay_lock',{
                 key : 'lock'
                 , value: true
@@ -302,6 +306,7 @@ $("body").on("click","#unlock",function(){
         if($this.val().length > 0){
             window.sessionStorage.setItem("lockcms",false);
             $(this).siblings(".admin-header-lock-input").val('');
+            isLock = false;
             layui.data('lay_lock',{
                 key : 'lock'
                 , value: false
